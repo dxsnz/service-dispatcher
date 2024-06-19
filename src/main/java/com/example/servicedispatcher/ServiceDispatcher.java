@@ -1,4 +1,4 @@
-package com.example.servicedispatcher.dispatcher;
+package com.example.servicedispatcher;
 
 import com.example.servicedispatcher.annotation.MethodName;
 import com.example.servicedispatcher.annotation.ParamDto;
@@ -45,8 +45,8 @@ public class ServiceDispatcher {
         if (serviceClass == null) {
             throw new Exception("服务类型为空");
         }
-        logger.info("开始调用外挂方法 " + methodName);
-        logger.info("接收到主程序传来的参数 paramMap: " + paramMap);
+        logger.info("开始方法 " + methodName);
+        logger.info("接收到参数 paramMap: " + paramMap);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         Result result;
@@ -60,7 +60,7 @@ public class ServiceDispatcher {
             result = Result.fail(e.getMessage());
         } finally {
             stopWatch.stop();
-            logger.info("结束调用外挂方法 " + methodName + ", 耗时：{} ms", stopWatch.getLastTaskTimeMillis());
+            logger.info("结束调用方法 " + methodName + ", 耗时：{} ms", stopWatch.getLastTaskTimeMillis());
         }
         return result.getJsonString();
     }
